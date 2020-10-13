@@ -1,0 +1,20 @@
+<ion-content>
+  <div class="container">
+    <h4 align="center" class="text-muted">Register</h4>
+    <form [formGroup]="authForm" class="form" align="center" (submit)="onSubmit()">
+      <ion-list>
+        <ion-item>
+          <ion-input type="text" placeholder="Nome Completo" formControlName="nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="E-mail" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Senha" formControlName="senha"></ion-input>
+        </ion-item>
+        <ion-button shape="round" expand="block" type="submit" [disabled]="authForm.invalid">Register</ion-button>
+      </ion-list>
+    </form>
+  </div>
+
+</ion-content>

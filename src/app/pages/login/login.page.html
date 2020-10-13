@@ -1,0 +1,23 @@
+<ion-content>
+  <div class="container">
+    <h4 align="center" class="text-muted">LOGIN</h4>
+    <form [formGroup]="authForm" class="form" align="center" (submit)="onSubmit()">
+      <ion-list>
+        <ion-item>
+          <ion-input type="text" placeholder="E-mail" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Senha" formControlName="senha"></ion-input>
+        </ion-item>
+        <ion-button shape="round" expand="block" type="submit" [disabled]="authForm.invalid">LogIn</ion-button>
+      </ion-list>
+    </form>
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-title align="center" style="font-size: 10px; text-decoration: underline;" color="primary" (click)="pageCadastro()">Não tenho cadastro</ion-title>
+  </ion-toolbar>
+</ion-footer>
