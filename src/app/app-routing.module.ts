@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -7,10 +8,8 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-  {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' , canActivate: [AuthGuardService]},
+  { path: 'ver-foto/:id', loadChildren: './pages/ver-foto/ver-foto.module#VerFotoPageModule', canActivate: [AuthGuardService]},
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -18,11 +17,7 @@ const routes: Routes = [
   {
     path: 'cadastro',
     loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule)
-  },
-  {
-    path: 'ver-foto/:id',
-    loadChildren: () => import('./pages/ver-foto/ver-foto.module').then( m => m.VerFotoPageModule)
-  },
+  }
 ];
 
 @NgModule({

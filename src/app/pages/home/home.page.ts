@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { async } from '@angular/core/testing';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomePage {
     private router: Router,
     private toastController: ToastController,
     private loadingController: LoadingController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private authService: AuthenticationService
   ) {}
 
   ionViewDidEnter() {
@@ -94,6 +96,7 @@ export class HomePage {
         }, {
           text: 'Sim',
           handler: async () => {
+            this.authService.logout();
             this.presentLoading();
             console.log('Confirm Okay');
             localStorage.removeItem('token');

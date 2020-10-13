@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private http: HttpClient,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private authService: AuthenticationService
   ) {  }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class LoginPage implements OnInit {
     this.presentLoading();
     this.http.post('https://uploadimagedreyk.herokuapp.com/login', this.authForm.value)
       .subscribe( (response: any) => {
+        this.authService.login();
         console.log(response);
         localStorage.setItem('token', response.token);
         this.router.navigate(['home']);
