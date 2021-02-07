@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { async } from '@angular/core/testing';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -21,7 +21,8 @@ export class HomePage {
     private toastController: ToastController,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private navCtrl: NavController
   ) {}
 
   ionViewDidEnter() {
@@ -97,24 +98,15 @@ export class HomePage {
           text: 'Sim',
           handler: async () => {
             this.authService.logout();
-            this.presentLoading();
             console.log('Confirm Okay');
             localStorage.removeItem('token');
             this.router.navigate(['login']);
-            this.fechar();
-            console.log('Loading dismissed!');
-            this.presentToast('Disconnected', '');
+            this.navCtrl.navigateRoot('home');
           }
         }
       ]
     });
 
     await alert.present();
-  }
-  fechar(){
-    setTimeout(() => {
-      this.loading.dismiss();
-      console.log('fechou');
-    });
   }
 }

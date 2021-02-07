@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { HomePage } from '../home/home.page';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
     private http: HttpClient,
     private loadingController: LoadingController,
     private toastController: ToastController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private navCtrl: NavController
   ) {  }
 
   ngOnInit() {
@@ -53,7 +55,8 @@ export class LoginPage implements OnInit {
         this.authService.login();
         console.log(response);
         localStorage.setItem('token', response.token);
-        this.router.navigate(['home']);
+        // this.router.navigate(['home']);
+        this.navCtrl.navigateRoot('home');
         this.loading.dismiss();
         this.presentToast('Successfully logged in', 'success');
       }, (error) => {
